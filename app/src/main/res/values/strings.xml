@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Whac-A-Mole</string>
+    <string name="game_description">Whack more moles in 30 seconds</string>
+    <string name="start">Start</string>
+    <string name="best_score">Best score:</string>
+</resources>
