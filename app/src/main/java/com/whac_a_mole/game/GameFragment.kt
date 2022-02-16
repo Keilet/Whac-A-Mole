@@ -1,11 +1,13 @@
 package com.whac_a_mole.game
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
+import androidx.appcompat.app.AppCompatActivity
 import com.whac_a_mole.R
 import com.whac_a_mole._base.ViewBindingFragment
 import com.whac_a_mole.databinding.FragmentGameBinding
@@ -27,6 +29,10 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
     ) {
         super.onViewBindingCreated(viewBinding, savedInstanceState)
 
+        val settings: SharedPreferences = requireActivity().getSharedPreferences("Account",
+            AppCompatActivity.MODE_PRIVATE)
+        val scoreSP: SharedPreferences.Editor=settings.edit()
+
         var newScore = 0
         val FIELD_ROWS = 3
         val FIELD_COLUMNS = 3
@@ -45,6 +51,8 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
             }
 
             override fun onFinish() {
+                val bestScore: Int = settings.getInt("score", 0)
+                if (bestScore<newScore)scoreSP.putInt("score",newScore).apply()
                 parentFragmentManager.beginTransaction().replace(R.id.container, ResultFragment())
                     .commit()
             }
