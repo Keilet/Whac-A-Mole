@@ -53,7 +53,7 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
             override fun onFinish() {
                 val bestScore: Int = settings.getInt("score", 0)
                 if (bestScore<newScore)scoreSP.putInt("score",newScore).apply()
-                parentFragmentManager.beginTransaction().replace(R.id.container, ResultFragment())
+                parentFragmentManager.beginTransaction().replace(R.id.container, ResultFragment(newScore))
                     .commit()
             }
 

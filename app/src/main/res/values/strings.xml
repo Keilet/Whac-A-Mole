@@ -4,4 +4,7 @@
     <string name="start">Start</string>
     <string name="best_score">Best score:</string>
     <string name="score">Score:</string>
+    <string name="new_record">New record!</string>
+    <string name="play_again">Play again</string>
+    <string name="menu">Menu</string>
 </resources>
