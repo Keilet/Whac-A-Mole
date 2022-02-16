@@ -10,6 +10,9 @@ import com.whac_a_mole.R
 import com.whac_a_mole._base.ViewBindingFragment
 import com.whac_a_mole.databinding.FragmentGameBinding
 import com.whac_a_mole.result.ResultFragment
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 class GameFragment : ViewBindingFragment<FragmentGameBinding>(
     FragmentGameBinding::inflate
@@ -63,6 +66,20 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
 
             }
             tableLayout.addView(tableRow, i)
+        }
+
+        Timer().schedule(100, 500) {
+            moveMole()
+        }
+    }
+
+    fun moveMole(){
+        images.forEach { i -> i.setImageResource(R.drawable.ic_hole) }
+        val rnd = (0..8).random()
+        images.forEachIndexed { index, imageView ->
+            if (index == rnd) imageView.setImageResource(
+                R.drawable.ic_mole
+            )
         }
     }
 }
