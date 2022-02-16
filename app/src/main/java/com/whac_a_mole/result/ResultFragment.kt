@@ -4,8 +4,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.whac_a_mole.MainActivity
+import com.whac_a_mole.R
 import com.whac_a_mole._base.ViewBindingFragment
 import com.whac_a_mole.databinding.FragmentResultBinding
+import com.whac_a_mole.game.GameFragment
 
 
 class ResultFragment(val score:Int): ViewBindingFragment<FragmentResultBinding>(
@@ -25,5 +28,11 @@ class ResultFragment(val score:Int): ViewBindingFragment<FragmentResultBinding>(
 
         if (bestScore!=score) viewBinding.newRecord.visibility= View.GONE
 
+        viewBinding.menuButton.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+        }
+        viewBinding.againButton.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.container, GameFragment()).commit()
+        }
     }
 }
