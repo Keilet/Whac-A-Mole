@@ -27,6 +27,7 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
     ) {
         super.onViewBindingCreated(viewBinding, savedInstanceState)
 
+        var newScore = 0
         val FIELD_ROWS = 3
         val FIELD_COLUMNS = 3
 
@@ -70,6 +71,22 @@ class GameFragment : ViewBindingFragment<FragmentGameBinding>(
 
         Timer().schedule(100, 500) {
             moveMole()
+        }
+
+        images.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
+                val imageViewDrawable = imageView.getDrawable().constantState
+
+                val fromResourcesDrawable = getResources().getDrawable(R.drawable.ic_mole,null).constantState
+
+                if (imageViewDrawable!! == fromResourcesDrawable){
+                    newScore++
+                    imageView.setImageResource(
+                        R.drawable.ic_dead_mole
+                    )
+                    viewBinding.score.text = newScore.toString()
+                }
+            }
         }
     }
 
